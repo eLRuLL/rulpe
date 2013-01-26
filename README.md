@@ -1,4 +1,4 @@
 rulpe
 =====
 
-Simple URL Shortener created by eLRuLL.
+Simple URL Shortener on Django created by eLRuLL.
