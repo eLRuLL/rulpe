@@ -31,14 +31,11 @@ def shortener(request):
 			for i in xrange(5):
 				short_url += alfa[randint(0,len(alfa)-1)]
 
-			tries = 0
 			while Paginas.objects.filter(short_url=short_url).exists():
 				# Paginas.objects.get(short_url=short_url)
 				short_url = ''
 				for i in xrange(5):
 					short_url += alfa[randint(0,len(alfa)-1)]
-				tries += 1
-				print str(tries) + " , short_url:" + short_url
 
 			my_page = Paginas(short_url=short_url, long_url=myurl, creation_time=datetime.now(),clicks=0)
 			my_page.save()
