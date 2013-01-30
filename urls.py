@@ -6,10 +6,10 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'paginas.views.home', name='home'),
-    url(r'^shortener/$','paginas.views.shortener', name='shortener'),
-    url(r'^(?P<cosa>\w+)/$', 'paginas.views.counter', name='counter'),
-    # url(r'^urlshortener/', include('urlshortener.foo.urls')),
+    url(r'^$', 'shortener.views.home', name='home'),
+    url(r'^shortener/$','shortener.views.shortener', name='shortener'),
+    url(r'^(?P<cosa>\w+)/$', 'shortener.views.counter', name='counter'),
+    # url(r'^rulpe/', include('rulpe.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
