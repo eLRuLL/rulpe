@@ -9,6 +9,7 @@ from datetime import datetime
 
 def home(request):
 
+	# First, we need to define how are we gonna show the list. (which order)
 	Pages = master.objects.all().order_by('creation_time')
 	lista = []
 	for i in Pages:
