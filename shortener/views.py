@@ -6,7 +6,6 @@ from models import master
 from datetime import datetime
 # from functions import 
 
-
 def home(request):
 
 	# First, we need to define how are we gonna show the list. (which order)
@@ -17,7 +16,7 @@ def home(request):
 			lista.append({'long_url': str(i.long_url)[:30] + '...','short_url': i.short_url, 'creation_time':i.creation_time, 'clicks':i.clicks})
 		else:
 			lista.append({'long_url': str(i.long_url),'short_url': i.short_url, 'creation_time':i.creation_time, 'clicks':i.clicks})
-	return render_to_response('../templates/index.html',{'Pages': lista})
+	return render(request,'index.html',{'Pages': lista})
 
 
 def shortener(request):
@@ -28,7 +27,7 @@ def shortener(request):
 	else:
 		if master.objects.filter(long_url=myurl).exists():
 			temp_short = master.objects.get(long_url=myurl)
-			return render_to_response('../templates/yaexiste.html',{'shorten' : temp_short.short_url})
+			return render(request,'yaexiste.html',{'shorten' : temp_short.short_url})
 		else:
 			short_url = ''
 			for i in xrange(5):
@@ -43,7 +42,7 @@ def shortener(request):
 			my_page = master(short_url=short_url, long_url=myurl, creation_time=datetime.now(),clicks=0)
 			my_page.save()
 
-		return render_to_response('../templates/shortener.html',{'myurl':myurl})
+		return render(request,'shortener.html',{'myurl':myurl})
 
 def counter(request,cosa):
 	temp_short = master.objects.get(short_url=cosa)
