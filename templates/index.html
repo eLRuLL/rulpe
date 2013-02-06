@@ -80,8 +80,9 @@
             <p>The URL shortener website designed for you.</p>
         </div>
         <div class="control-group">
-            <form class="form-horizontal" name="input" action="shortener" method="get">
-                <input class="input-xlarge search-query" type="text" placeholder="Insert URL" name ="the_url">
+            <form class="form-horizontal" name="input" action="/shortener/" method="post">
+                {% csrf_token %}
+                <input class="input-xlarge search-query" type="text" placeholder="Insert URL" name ="long_url">
                 <button class="btn btn-primary btn-large" type="submit" class="btn">Short URL</button>
             </form>
         </div>
