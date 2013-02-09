@@ -7,7 +7,8 @@ when you run "manage.py test".
 from django.test import TestCase
 from django.test.client import Client
 from models import master
-from functions import validate_url, base10ton, populate
+from functions import validate_url, base10ton, populate, basento10, encode, decode
+from random import randint
 
 class ViewsTest(TestCase):
 	def test_home(self):
@@ -68,3 +69,21 @@ class FunctionsTest(TestCase):
         self.assertEqual(populate([2],5,1), [1,1,1,1,2])
         self.assertEqual(populate([0,1,2],6,3), [3,3,3,0,1,2])
         self.assertEqual(populate([0,1,2,3,4,5],6,3), [0,1,2,3,4,5])
+        # if the number to populate is lower than the array?
+        self.assertEqual(populate([0,1,2,3,4,5],5,3), [0,1,2,3,4,5])
+        self.assertEqual(populate([0,1,2,3,4,5],2,3), [0,1,2,3,4,5])
+        self.assertEqual(populate([0,1,2,3,4,5],3), [0,1,2,3,4,5])
+
+
+    def test_basento10(self):
+        self.assertEqual(basento10([0,1],2), 1)
+        self.assertEqual(basento10([0,0],2), 0)
+        self.assertEqual(basento10([1,0,0,0],2), 8)
+        self.assertEqual(basento10([0,0],2412321), 0)
+        self.assertEqual(basento10([10],11), 10)
+        self.assertEqual(basento10([1,0],11), 11)
+        self.assertEqual(basento10([1,1],12), 13)
+
+    def test_encode_decode(self):
+        for i in range(0, 1234567, randint(20,100)):
+            self.assertEqual(decode(encode(i)),i)

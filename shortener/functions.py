@@ -28,8 +28,12 @@ def base10ton(number, n):
 
 def basento10(number, n):
 	i = 0
-	while number[i] == 0:
-		i += 1
+	for elem in number:
+		if elem != 0:
+			break
+		else:
+			i+= 1
+	
 	solution = 0
 	for x in range(i,len(number)):
 		solution += number[x] * (n**(len(number)-x-1))

@@ -30,10 +30,11 @@ def shortener(request):
 		return render(request,'yaexiste.html',{'shorten' : temp_short.short_url})
 
 	else:
-		# Unique Code Generator Function for SHORT_URL
+		
 		record = master(short_url='', long_url=myurl, creation_time=datetime.now(),clicks=0)
 		record.save()
 
+		# Unique Code Generator Function for SHORT_URL
 		short_url = encode(record.id)
 
 		master.objects.filter(id=record.id).update(short_url=short_url)
