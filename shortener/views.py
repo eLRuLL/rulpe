@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response, redirect, render
 from random import randint
 from models import master
 from datetime import datetime
-from functions import validate_url
+from functions import validate_url, populate, base10ton, encode, decode
 
 def home(request):
 
@@ -20,7 +20,6 @@ def home(request):
 
 
 def shortener(request):
-	alfa = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 	myurl = request.POST.get('long_url','')
 
 	if not validate_url(myurl):
@@ -32,24 +31,18 @@ def shortener(request):
 
 	else:
 		# Unique Code Generator Function for SHORT_URL
-		short_url = ''
-		for i in xrange(5):
-			short_url += alfa[randint(0,len(alfa)-1)]
+		record = master(short_url='', long_url=myurl, creation_time=datetime.now(),clicks=0)
+		record.save()
 
-		while master.objects.filter(short_url=short_url).exists():
-			# master.objects.get(short_url=short_url)
-			short_url = ''
-			for i in xrange(5):
-				short_url += alfa[randint(0,len(alfa)-1)]
+		short_url = encode(record.id)
 
-
-		my_page = master(short_url=short_url, long_url=myurl, creation_time=datetime.now(),clicks=0)
-		my_page.save()
+		master.objects.filter(id=record.id).update(short_url=short_url)
 
 		return render(request,'shortener.html',{'myurl':myurl})
 
 def counter(request,cosa):
-	temp_short = master.objects.get(short_url=cosa)
+
+	temp_short = master.objects.get(id=decode(cosa))
 	temp_short.clicks += 1
 	temp_short.save()
 	return redirect('http://' + temp_short.long_url)

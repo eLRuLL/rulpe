@@ -149,3 +149,7 @@ LOGGING = {
         },
     }
 }
+
+
+# MY VARIABLES
+ALPHABET = os.path.join(PROJECT_ROOT, 'alphabet.txt')
