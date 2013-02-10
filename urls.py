@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'shortener.views.home', name='home'),
     url(r'^shortener/$','shortener.views.shortener', name='shortener'),
-    url(r'^(?P<cosa>\w+)/$', 'shortener.views.counter', name='counter'),
+    url(r'^(?P<shorten>\w+)/$', 'shortener.views.counter', name='counter'),
     # url(r'^rulpe/', include('rulpe.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

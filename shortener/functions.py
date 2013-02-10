@@ -4,16 +4,17 @@ from django.conf import settings
 from urlparse import urlparse
 
 def validate_url(_url):
+	new_url = _url
 	validate = URLValidator(verify_exists=False)
-	parsed = urlparse(_url)
+	parsed = urlparse(new_url)
 	if not parsed.scheme:
-		_url = 'http://' + _url
+		new_url = 'http://' + new_url
 
 	try:
-		validate(_url)
-		return True
+		validate(new_url)
+		return new_url
 	except ValidationError, e:
-		return False
+		return None
 
 def base10ton(number, n):
 	x = []
