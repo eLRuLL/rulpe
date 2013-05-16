@@ -5,7 +5,7 @@ from urlparse import urlparse
 
 def validate_url(_url):
 	new_url = _url
-	validate = URLValidator(verify_exists=False)
+	validate = URLValidator()
 	parsed = urlparse(new_url)
 	if not parsed.scheme:
 		new_url = 'http://' + new_url
