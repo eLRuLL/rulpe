@@ -1,5 +1,6 @@
 # Django settings for rulpe project.
-import os.path
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Absolute Path of current project.
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -14,8 +15,9 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '.sqlite3.db',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',
+        # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),    # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -72,7 +74,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static/'),
+    os.path.join(os.path.dirname(__file__), '..//', 'static').replace('\\', '/'),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -83,7 +85,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -93,7 +95,7 @@ SECRET_KEY = '_#wk=$u#+*4o9=nylpjn2-c*q&-c4od46ouf^bwmhn&=)t0i&4'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -110,7 +112,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_ROOT, 'templates/'),
+    os.path.join(os.path.dirname(__file__), '..//', 'templates').replace('\\', '/'),
 )
 
 INSTALLED_APPS = (
@@ -124,7 +126,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'shortener',
+    'rulpe.apps.shortener',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -152,4 +154,4 @@ LOGGING = {
 
 
 # MY VARIABLES
-ALPHABET = os.path.join(PROJECT_ROOT, 'alphabet.txt')
+ALPHABET = os.path.join(os.path.dirname(__file__), '..//', 'alphabet.txt').replace('\\','/')
