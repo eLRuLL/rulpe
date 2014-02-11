@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls.defaults import patterns, url
 import sys
 import os
 
@@ -8,6 +8,7 @@ import os
 
 
 sys.stderr.write(os.path.join(os.path.dirname(__file__), '../', 'static').replace('\\', '/'))
+images = os.path.join( os.path.dirname(__file__), 'images')
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'rulpe.apps.shortener.views.home', name='home'),
@@ -20,5 +21,4 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    (r'^favicon\.ico$', 'django.views.generic.simple.red1irect_to', {'url': os.path.join(os.path.dirname(__file__), '..//', 'static').replace('\\', '/')+'/img/favicon.ico'}),
 )
